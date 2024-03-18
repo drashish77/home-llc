@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 
 interface FormProps {
   onSubmit: Function;
-  loading: boolean;
   setLoading: Function;
+  setIsSearchVisible: Function;
 }
 
-const SearchForm: React.FC<FormProps> = ({ onSubmit, setLoading }) => {
+const SearchForm: React.FC<FormProps> = ({
+  onSubmit,
+  setLoading,
+  setIsSearchVisible,
+}) => {
   const [city, setCity] = useState("");
-
-  const [coord, setCoord] = useState({ lat: String, lon: String });
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1072914dac1cfb3bb8205723370ab007`;
   const url2 = `https://api.openweathermap.org/data/2.5/weather?q=Gurugram&appid=1072914dac1cfb3bb8205723370ab007`;
 
@@ -20,11 +22,17 @@ const SearchForm: React.FC<FormProps> = ({ onSubmit, setLoading }) => {
     try {
       fetch(url)
         .then((response) => {
-          if (response.ok) return response.json();
+          console.log("response", response);
+          if (response.ok) {
+            return response.json();
+          } else {
+            setLoading(false);
+          }
         })
         .then((data) => {
+          console.log("data", data);
           onSubmit(data);
-          setCoord(data.coord);
+          setIsSearchVisible(false);
           setLoading(false);
         });
     } catch (error) {
@@ -45,7 +53,6 @@ const SearchForm: React.FC<FormProps> = ({ onSubmit, setLoading }) => {
         })
         .then((data) => {
           onSubmit(data);
-          setCoord(data.coord);
           setLoading(false);
         });
     } catch (error) {
