@@ -6,10 +6,8 @@ import { getDate } from "./utils/time";
 import Card from "./components/Card";
 import { FinalDataType } from "./utils/finalDataType";
 import AdditionalInfo from "./components/AdditionalInfo";
-import ChartNew from "./components/ChartNewcopy";
+import ChartNew from "./components/ChartNew";
 import Loader from "./components/Loader";
-import { DotLottiePlayer, Controls } from "@dotlottie/react-player";
-import "@dotlottie/react-player/dist/index.css";
 
 function App() {
   const [cityData, setCityData] = useState<CityDataType>();
@@ -49,7 +47,7 @@ function App() {
 
   console.log({ tempData });
   return (
-    <div className="container m-auto">
+    <div className=" container">
       <div className="p-2">
         <div className="mt-5 flex justify-center">
           <SearchForm
@@ -62,35 +60,69 @@ function App() {
           <Loader />
         ) : (
           <div className="">
-            <p className="text-[#003339] text-2xl">{cityData?.name}</p>
-            <p className="text-[#003339] text-2xl">{cityData?.sys.country}</p>
-            {cityData && (
-              <p className="text-[#96969A] text-[15px]">
-                {getDate(cityData?.dt)}
-              </p>
-            )}
-            <p className="text-[#057BFF] text-[15px]">
-              {cityData?.weather[0].main}
-            </p>
-            <img
-              src={` https://openweathermap.org/img/wn/${cityData?.weather[0].icon}@2x.png`}
-              alt={cityData?.weather[0].icon}
-            />
-            <p>HOURLY WEATHER</p>
-            <div className="overflow-x-auto lg:w-1/2 justify-center flex bg-[#003339] p-2">
-              {finalData &&
-                finalData?.hourly
-                  .slice(0, 5)
-                  // .filter((i) => i.dt - finalData.current.dt > 130000)
-                  .map((hourData) => {
+            {/* Hero section */}
+            <section className=" mt-5 ">
+              <div className="flex justify-between items-center">
+                <div className="">
+                  <h4 className="text-[#003339] text-2xl md:text-3xl lg:text-6xl">
+                    {cityData?.name}
+                  </h4>
+                  <p className="text-[#003339] text-2xl md:text-3xl lg:text-6xl">
+                    {cityData?.sys.country}
+                  </p>
+                  {cityData && (
+                    <p className="text-[#96969A] text-[15px] lg:text-3xl">
+                      {getDate(cityData?.dt)}
+                    </p>
+                  )}
+                  <div className="flex space-x-5 items-center">
+                    <img
+                      src={` https://openweathermap.org/img/wn/${cityData?.weather[0].icon}@2x.png`}
+                      className="w-10 md:w-20"
+                      alt={cityData?.weather[0].icon}
+                    />
+                    <p className="text-[#057BFF] text-[15px] lg:text-3xl">
+                      {cityData?.weather[0].main}
+                    </p>
+                  </div>
+                </div>
+                <div className="w-[55%] md:w-1/4 ">
+                  <img
+                    src="/city.jpg"
+                    className="w-full rounded-xl"
+                    alt="city pic for decoration"
+                  />
+                </div>
+              </div>
+            </section>
+            {/* Hourly weather section */}
+            <section className=" mt-20">
+              <h4 className="my-5 text-xl md:text-2xl lg:text-4xl text-[#003339] sr-only">
+                Hourly Weather
+              </h4>
+              <div className="overflow-x-auto lg:w-2/3 rounded-[2rem] justify-center flex bg-[#003339] p-2">
+                {finalData &&
+                  finalData?.hourly.slice(0, 5).map((hourData) => {
                     return <Card data={hourData} />;
                   })}
-            </div>
-            <AdditionalInfo data={finalData?.current} />
-            <div className="">
-              {/* <Chart data={tempData} /> */}
-              <ChartNew data={tempData} />
-            </div>
+              </div>
+            </section>
+            {/* Additional info section */}
+            <section className="mt-20">
+              <h4 className="my-5 text-lg text-[#003339] md:text-2xl lg:text-4xl ">
+                Additional Info
+              </h4>
+              <AdditionalInfo data={finalData?.current} />
+            </section>
+            <section className=" mt-20">
+              <h4 className="my-5 text-xl md:text-2xl lg:text-4xl text-[#003339] mb-10">
+                Temprature
+              </h4>
+              <div className="">
+                {/* <Chart data={tempData} /> */}
+                <ChartNew data={tempData} />
+              </div>
+            </section>
           </div>
         )}
       </div>
@@ -99,5 +131,3 @@ function App() {
 }
 
 export default App;
-
-// flex-none py-6 px-3 first:pl-6 last:pr-6 bg-red-500

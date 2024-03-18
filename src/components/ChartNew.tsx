@@ -66,7 +66,15 @@ export default function ChartNew(props: any) {
         categoryXField: "date",
       })
     );
-
+    series1.columns.template.setAll({
+      tooltipText: "{categoryX}: {valueY}°C",
+    });
+    series2.columns.template.setAll({
+      tooltipText: "{categoryX}: {valueY}°C",
+    });
+    series3.columns.template.setAll({
+      tooltipText: "{categoryX}: {valueY}°C",
+    });
     // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
     legend.data.setAll(chart.series.values);
@@ -92,5 +100,5 @@ export default function ChartNew(props: any) {
     series3Ref.current.data.setAll(props.data);
   }, [props.data]);
 
-  return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+  return <div id="chartdiv" className="w-full h-[300px] lg:h-[500px]"></div>;
 }

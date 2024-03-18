@@ -3,6 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  /* background: teal; */
+  /* background: gainsboro; */
   font-family: "Abhaya Libre", serif;
 }
