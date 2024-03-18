@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a weather dashboard project built with ReactJS and TailwindCSS. It utilizes the [OpenWeather](https://openweathermap.org/) API to fetch weather data and displays it in a user-friendly dashboard interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo/Testing url
 
-## Expanding the ESLint configuration
+Open [testing site](https://w1.tiiny.site/) with your browser to see the result.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- Reactjs: Reactjs is a React framework for building server-side rendered and statically generated applications.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Tailwind CSS: Tailwind CSS is a utility-first CSS framework for quickly building custom designs.
+- Icons: React-Icons provides popular icon packs as React components.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Features
+
+- Displays current weather information including temperature, humidity, wind speed, and weather conditions.
+- Provides a visually appealing dashboard interface.
+- Utilizes React-Icons library for icons.
+- Responsive design powered by TailwindCSS.
+
+## Setup/Installation
+
+- Clone the repository.
+- Install dependencies using npm.
+- Run the development server with npm run dev.
+- Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Usage
+
+- Getting weather data of various city by searching
+- getting temperature data
