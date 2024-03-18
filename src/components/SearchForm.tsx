@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface FormProps {
   onSubmit: Function;
+  loading: boolean;
+  setLoading: Function;
 }
 
-const SearchForm: React.FC<FormProps> = ({ onSubmit }) => {
+const SearchForm: React.FC<FormProps> = ({ onSubmit, loading, setLoading }) => {
   const [city, setCity] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const [coord, setCoord] = useState({ lat: String, lon: String });
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1072914dac1cfb3bb8205723370ab007`;
+  const url2 = `https://api.openweathermap.org/data/2.5/weather?q=indore&appid=1072914dac1cfb3bb8205723370ab007`;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // onSubmit(city);
+    setLoading(true);
     try {
       fetch(url)
         .then((response) => {
@@ -21,6 +25,7 @@ const SearchForm: React.FC<FormProps> = ({ onSubmit }) => {
         .then((data) => {
           onSubmit(data);
           setCoord(data.coord);
+          setLoading(false);
         });
     } catch (error) {
       console.log({ error });
@@ -31,7 +36,22 @@ const SearchForm: React.FC<FormProps> = ({ onSubmit }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
-
+  useEffect(() => {
+    setLoading(true);
+    try {
+      fetch(url2)
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((data) => {
+          onSubmit(data);
+          setCoord(data.coord);
+          setLoading(false);
+        });
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
   return (
     <form onSubmit={handleSubmit}>
       <label>
